@@ -15,5 +15,17 @@ namespace ADONET
                     GROUP BY v.Id, v.Name 
                       HAVING COUNT(mv.VillainId) > 3 
                     ORDER BY COUNT(mv.VillainId)";
+
+
+        public const string minionsWithName = @"
+                    SELECT Name FROM Villains WHERE Id = @Id
+
+                    SELECT ROW_NUMBER() OVER (ORDER BY m.Name) AS RowNum,
+                                                             m.Name, 
+                                                             m.Age
+                                                        FROM MinionsVillains AS mv
+                                                        JOIN Minions As m ON mv.MinionId = m.Id
+                                                       WHERE mv.VillainId = @Id
+                                                    ORDER BY m.Name";
     }
 }

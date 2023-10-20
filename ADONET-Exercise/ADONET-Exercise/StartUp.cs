@@ -30,4 +30,19 @@ internal class Program
             }
         }
     }
+
+
+    public static void MinionNames()
+    {
+        using (SqlConnection sqlConn = new SqlConnection(_connectionString))
+        {
+            sqlConn.Open();
+
+            using (SqlCommand minionsNamesCommand = new SqlCommand(SQLQueries.minionsWithName, sqlConn))
+            using (SqlDataReader sqlDataReader = minionsNamesCommand.ExecuteReader())
+            {
+                
+            }
+        }
+    }
 }
