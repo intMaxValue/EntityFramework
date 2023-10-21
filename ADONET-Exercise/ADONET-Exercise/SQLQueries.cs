@@ -18,8 +18,10 @@ namespace ADONET
 
 
         public const string minionsWithName = @"
-                    SELECT Name FROM Villains WHERE Id = @Id
+                    SELECT Name FROM Villains WHERE Id = @Id";
 
+
+        public const string minionsWithNameSecond = @"
                     SELECT ROW_NUMBER() OVER (ORDER BY m.Name) AS RowNum,
                                                              m.Name, 
                                                              m.Age
