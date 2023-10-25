@@ -2626,9 +2626,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Skynet\\Desktop\\repos\\EntityFramework\\ADONET-Exercise\\CustomORM\\CustomORM.csproj",
-      "projectName": "CustomORM",
-      "projectPath": "C:\\Users\\Skynet\\Desktop\\repos\\EntityFramework\\ADONET-Exercise\\CustomORM\\CustomORM.csproj",
+      "projectUniqueName": "C:\\Users\\Skynet\\Desktop\\repos\\EntityFramework\\ADONET-Exercise\\CustomORM\\ORM.csproj",
+      "projectName": "ORM",
+      "projectPath": "C:\\Users\\Skynet\\Desktop\\repos\\EntityFramework\\ADONET-Exercise\\CustomORM\\ORM.csproj",
       "packagesPath": "C:\\Users\\Skynet\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Skynet\\Desktop\\repos\\EntityFramework\\ADONET-Exercise\\CustomORM\\obj\\",
       "projectStyle": "PackageReference",

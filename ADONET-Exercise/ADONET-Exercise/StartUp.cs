@@ -14,7 +14,9 @@ internal class Program
     {
         //PrintVillainsWithMinions();
 
+#pragma warning disable CS8604 // Possible null reference argument.
         int id = int.Parse(Console.ReadLine());
+#pragma warning restore CS8604 // Possible null reference argument.
         await MinionNames(id);
 
     }

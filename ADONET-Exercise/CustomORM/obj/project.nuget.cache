@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XP9fyFagtHV7EZ76TEGiHTQyX1ppXtppBOnY0CrckxEAMqXYQA96TpERN4EwsmZKQZG/KH56AjfH0daNwvId0A==",
+  "dgSpecHash": "sbZ2EsjgkAlRZPq1jUMD3iaajDp1NcdBQt27oM2fFNPcX8huKeb6NGkEbR+BJXyMx7KCCzh+6Xvpc1SIBvSvdw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Skynet\\Desktop\\repos\\EntityFramework\\ADONET-Exercise\\CustomORM\\CustomORM.csproj",
+  "projectFilePath": "C:\\Users\\Skynet\\Desktop\\repos\\EntityFramework\\ADONET-Exercise\\CustomORM\\ORM.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Skynet\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Skynet\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
