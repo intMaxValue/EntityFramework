@@ -19,7 +19,7 @@ namespace SoftUni.Data
         public virtual DbSet<Employee> Employees { get; set; } = null!;
         public virtual DbSet<Project> Projects { get; set; } = null!;
         public virtual DbSet<Town> Towns { get; set; } = null!;
-        public DbSet<EmployeeProject> EmployeesProjects { get; set; } = null!;
+        public virtual DbSet<EmployeeProject> EmployeesProjects { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -138,17 +138,25 @@ namespace SoftUni.Data
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<EmployeeProject>(entity => 
+            modelBuilder.Entity<EmployeeProject>(entity =>
             {
-                entity.HasKey(pk => new { pk.EmployeeId, pk.ProjectId});
+                entity.HasKey(e => new { e.EmployeeId, e.ProjectId });
 
-                entity.HasOne(ep => ep.Employee)
-                    .WithMany(e => e.EmployeesProject)
-                    .HasForeignKey(ep => ep.EmployeeId);
+                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
 
-                entity.HasOne(ep => ep.Project)
+                entity.Property(e => e.ProjectId).HasColumnName("ProjectID");
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.EmployeesProject)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_EmployeesProjects_Employees");
+
+                entity.HasOne(d => d.Project)
                     .WithMany(p => p.EmployeesProjects)
-                    .HasForeignKey(ep => ep.ProjectId);
+                    .HasForeignKey(d => d.ProjectId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_EmployeesProjects_Projects");
             });
             OnModelCreatingPartial(modelBuilder);
         }
