@@ -12,7 +12,7 @@ namespace SoftUni
         {
             SoftUniContext context = new SoftUniContext();
 
-            Console.WriteLine(GetEmployeesByFirstNameStartingWithSa(context));
+            Console.WriteLine(GetEmployee147(context));
 
         }
 
@@ -129,7 +129,7 @@ namespace SoftUni
                     e.LastName,
                     ManagerFirstName = e.Manager!.FirstName,
                     ManagerLastName = e.Manager!.LastName,
-                    Projects = e.EmployeesProject
+                    Projects = e.EmployeesProjects
                         .Where(ep => ep.Project.StartDate.Year >= 2001 &&
                                                   ep.Project.StartDate.Year <= 2003)
                         .Select(ep => new
@@ -193,7 +193,7 @@ namespace SoftUni
                     x.FirstName,
                     x.LastName,
                     x.JobTitle,
-                    Projects = x.EmployeesProject.Select(p => new { p.Project.Name }).OrderBy(p => p.Name).ToArray()
+                    Projects = x.EmployeesProjects.Select(p => new { p.Project.Name }).OrderBy(p => p.Name).ToArray()
                 })
                 .FirstOrDefault();
 
@@ -296,21 +296,69 @@ namespace SoftUni
         // Problem 13
         public static string GetEmployeesByFirstNameStartingWithSa(SoftUniContext context)
         {
-            var employees = context.Employees
-                .Select(e => new 
-                {
-                    e.FirstName,
-                    e.LastName,
-                    e.JobTitle,
-                    e.Salary
-                })
-                .Where(e => e.FirstName.StartsWith("sa"))
+            string[] employeesInfoText = context.Employees
+                .Where(e => e.FirstName.Substring(0, 2).ToLower() == "sa")
                 .OrderBy(e => e.FirstName)
                 .ThenBy(e => e.LastName)
+                .Select(e => $"{e.FirstName} {e.LastName} - {e.JobTitle} - (${e.Salary:f2})")
+                .ToArray();
+
+            return string.Join(Environment.NewLine, employeesInfoText);
+        }
+
+        // Problem 14
+        public static string DeleteProjectById(SoftUniContext context)
+        {
+            IQueryable<EmployeeProject> employeesProjects = context.EmployeesProjects
+                .Where(ep => ep.ProjectId == 2);
+
+            context.EmployeesProjects.RemoveRange(employeesProjects);
+
+            Project project = context.Projects.Find(2);
+            
+            context.Projects.Remove(project);
+
+            context.SaveChanges();
+
+            string[] projectNames = context.Projects
+                .Take(10)
+                .Select (e => e.Name)
+                .ToArray();
+
+            return string.Join(Environment.NewLine, projectNames);
+        }
+
+        // Problem 15
+        public static string RemoveTown(SoftUniContext context)
+        {
+            string townName = "Seattle";
+
+            var employeesInSeattle = context.Employees
+                .Where(e => e.Address.Town.Name == townName)
                 .ToList();
 
-            return string.Join(Environment.NewLine, employees.Select(e => 
-                    $"{e.FirstName} {e.LastName} - {e.JobTitle} - (${e.Salary:f2})"));
+            foreach (var employee in employeesInSeattle)
+            {
+                employee.AddressId = null;
+            }
+
+            context.SaveChanges();
+
+            var addressesInSeattle = context.Addresses
+                .Where(a => a.Town.Name == townName)
+                .ToList();
+
+            int removedAddressesCount = addressesInSeattle.Count;
+
+            context.Addresses.RemoveRange(addressesInSeattle);
+            context.SaveChanges();
+
+            var townToRemove = context.Towns.FirstOrDefault(t => t.Name == townName);
+            context.Towns.Remove(townToRemove);
+            context.SaveChanges();
+
+            return $"{removedAddressesCount} addresses in {townName} were deleted";
         }
+
     }
 }

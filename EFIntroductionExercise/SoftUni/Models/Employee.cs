@@ -9,7 +9,7 @@ namespace SoftUni.Models
         {
             Departments = new HashSet<Department>();
             InverseManager = new HashSet<Employee>();
-            EmployeesProject = new HashSet<EmployeeProject>();
+            EmployeesProjects = new HashSet<EmployeeProject>();
         }
 
         public int EmployeeId { get; set; }
@@ -29,6 +29,6 @@ namespace SoftUni.Models
         public virtual ICollection<Department> Departments { get; set; }
         public virtual ICollection<Employee> InverseManager { get; set; }
 
-        public virtual ICollection<EmployeeProject> EmployeesProject { get; set; }
+        public virtual ICollection<EmployeeProject> EmployeesProjects { get; set; }
     }
 }
