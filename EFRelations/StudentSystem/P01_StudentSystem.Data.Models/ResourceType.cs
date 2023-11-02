@@ -1,6 +1,10 @@
 ﻿namespace StudentSystem.P01_StudentSystem.Data.Models
 {
-    public class ResourceType
+    public enum ResourceType
     {
+        Video,
+        Presentation,
+        Document,
+        Other
     }
 }
