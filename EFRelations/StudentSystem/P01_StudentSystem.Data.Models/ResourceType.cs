@@ -1,4 +1,5 @@
-﻿namespace StudentSystem.P01_StudentSystem.Data.Models
+﻿
+namespace P01_StudentSystem.Data.Models
 {
     public enum ResourceType
     {
