@@ -15,11 +15,11 @@ namespace CarDealer
             // 10.
             var suppliers = File.ReadAllText("../../../Datasets/suppliers.json");
 
-            Console.WriteLine(ImportParts(context, suppliers));
+            Console.WriteLine(ImportSuppliers(context, suppliers));
         }
 
         // 10.ImportParts
-        public static string ImportParts(CarDealerContext context, string inputJson)
+        public static string ImportSuppliers(CarDealerContext context, string inputJson)
         {
             var config = new MapperConfiguration(cfg => cfg.AddProfile<CarDealerProfile>());
 
