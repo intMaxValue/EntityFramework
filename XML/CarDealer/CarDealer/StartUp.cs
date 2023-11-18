@@ -1,7 +1,11 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
+using System.Text;
 using System.Xml.Serialization;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using CarDealer.Data;
+using CarDealer.DTOs.Export;
 using CarDealer.DTOs.Import;
 using CarDealer.Models;
 using Castle.Core.Resource;
@@ -30,7 +34,7 @@ namespace CarDealer
             string salesXML = File.ReadAllText("../../../Datasets/sales.xml");
 
 
-            Console.WriteLine(ImportSales(context, salesXML));
+            Console.WriteLine(GetSalesWithAppliedDiscount(context));
 
 
         }
@@ -160,6 +164,116 @@ namespace CarDealer
             context.SaveChanges();
 
             return $"Successfully imported {sales.Length}";
+        }
+
+        public static string GetCarsWithDistance(CarDealerContext context)
+        {
+            var mapper = GetMapper();
+
+            var cars = context.Cars
+                .Where(c => c.TraveledDistance > 2000000)
+                .OrderBy(c => c.Make)
+                    .ThenBy(c => c.Model)
+                .Take(10)
+                .ProjectTo<exportCarsWithDistance>(mapper.ConfigurationProvider)
+                .ToArray();
+
+            XmlSerializer serializer = new XmlSerializer(typeof(exportCarsWithDistance[]), new XmlRootAttribute("cars"));
+
+            var xsn = new XmlSerializerNamespaces();
+            xsn.Add(string.Empty, string.Empty);
+
+            StringBuilder sb = new StringBuilder();
+
+            using (StringWriter sw = new StringWriter(sb))
+            {
+                serializer.Serialize(sw, cars, xsn);
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
+        public static string GetTotalSalesByCustomer(CarDealerContext context)
+        {
+            var tempDto = context.Customers
+                .Where(c => c.Sales.Any())
+                .Select(c => new
+                {
+                    FullName = c.Name,
+                    BoughtCars = c.Sales.Count(),
+                    Sales = c.Sales.Select(s => new
+                    {
+                        Prices = c.IsYoungDriver
+                            ? s.Car.PartsCars.Sum(p => Math.Round((double)p.Part.Price * 0.95, 2))
+                            : s.Car.PartsCars.Sum(p => (double)p.Part.Price)
+                    }).ToArray(),
+                })
+                .ToArray();
+
+            exportSalesPerCustomerDto[] totalSalesDtos = tempDto
+                .OrderByDescending(t => t.Sales.Sum(s => s.Prices))
+                .Select(t => new exportSalesPerCustomerDto()
+                {
+                    FullName = t.FullName,
+                    BoughtCars = t.BoughtCars,
+                    SpentMoney = t.Sales.Sum(s => s.Prices).ToString("f2")
+                })
+                .ToArray();
+
+            return SerializeToXml<exportSalesPerCustomerDto[]>(totalSalesDtos, "customers");
+        }
+
+        public static string GetSalesWithAppliedDiscount(CarDealerContext context)
+        {
+            var salesWithDiscount = context.Sales
+                .AsEnumerable()
+                .Select(s => new exportSalesDto
+                {
+                    Car = new exportCarDto
+                    {
+                        Make = s.Car?.Make,
+                        Model = s.Car?.Model,
+                        TraveledDistance = s.Car?.TraveledDistance.ToString()
+                    },
+                    Discount = s.Discount.ToString("F2", CultureInfo.InvariantCulture),
+                    CustomerName = s.Customer?.Name,
+                    Price = (s.Car?.PartsCars.Sum(pc => pc.Part.Price) ?? 0).ToString("F2", CultureInfo.InvariantCulture),
+                    PriceWithDiscount = (s.Car?.PartsCars.Sum(pc => pc.Part.Price * (1 - s.Discount / 100)) ?? 0).ToString("F2", CultureInfo.InvariantCulture)
+                })
+                .ToArray();
+
+            return SerializeToXml<exportSalesDto[]>(salesWithDiscount, "sales");
+        }
+
+
+
+
+
+
+        // Generic Method To Serialize DTOs To XML
+        private static string SerializeToXml<T>(T dto, string xmlRootAttribute)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(T), new XmlRootAttribute(xmlRootAttribute));
+
+            StringBuilder sb = new StringBuilder();
+
+            using (StringWriter sw = new StringWriter(sb, CultureInfo.InvariantCulture))
+            {
+                XmlSerializerNamespaces xmlns = new XmlSerializerNamespaces();
+                xmlns.Add(String.Empty, String.Empty);
+
+                try
+                {
+                    serializer.Serialize(sw, dto, xmlns);
+                }
+                catch (Exception )
+                {
+                    throw;
+                }
+
+            }
+                
+            return sb.ToString().TrimEnd();
         }
     }
 }
