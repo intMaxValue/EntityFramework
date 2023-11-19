@@ -60,3 +60,4 @@ C:\Users\Skynet\Desktop\repos\EntityFramework\XML\CarDealer\CarDealer\obj\Debug\
 C:\Users\Skynet\Desktop\repos\EntityFramework\XML\CarDealer\CarDealer\obj\Debug\net6.0\CarDealer.pdb
 C:\Users\Skynet\Desktop\repos\EntityFramework\XML\CarDealer\CarDealer\obj\Debug\net6.0\CarDealer.genruntimeconfig.cache
 C:\Users\Skynet\Desktop\repos\EntityFramework\XML\CarDealer\CarDealer\obj\Debug\net6.0\ref\CarDealer.dll
+C:\Users\Skynet\Desktop\repos\EntityFramework\XML\CarDealer\CarDealer\obj\Debug\net6.0\CarDealer.sourcelink.json

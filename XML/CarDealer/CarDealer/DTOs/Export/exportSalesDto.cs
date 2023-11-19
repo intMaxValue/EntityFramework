@@ -1,5 +1,4 @@
-﻿
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace CarDealer.DTOs.Export
 {
@@ -7,18 +6,31 @@ namespace CarDealer.DTOs.Export
     public class exportSalesDto
     {
         [XmlElement("car")]
-        public exportCarDto Car { get; set; }
+        public SingleCar SingleCar { get; set; }
 
         [XmlElement("discount")]
-        public string Discount { get; set; }
+        public int Discount { get; set; }
 
         [XmlElement("customer-name")]
         public string CustomerName { get; set; }
 
         [XmlElement("price")]
-        public string Price { get; set; }
+        public decimal Price { get; set; }
 
         [XmlElement("price-with-discount")]
-        public string PriceWithDiscount { get; set; }
+        public double PriceWithDiscount { get; set; }
+    }
+
+    [XmlType("car")]
+    public class SingleCar
+    {
+        [XmlAttribute("make")]
+        public string Make { get; set; }
+
+        [XmlAttribute("model")]
+        public string Model { get; set; }
+
+        [XmlAttribute("traveled-distance")]
+        public long TraveledDistance { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using CarDealer.DTOs.Export;
 using CarDealer.DTOs.Import;
 using CarDealer.Models;
 using Castle.Core.Resource;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarDealer
 {
@@ -225,25 +226,27 @@ namespace CarDealer
 
         public static string GetSalesWithAppliedDiscount(CarDealerContext context)
         {
-            var salesWithDiscount = context.Sales
-                .AsEnumerable()
-                .Select(s => new exportSalesDto
+            exportSalesDto[] salesDtos = context
+                .Sales
+                .Select(s => new exportSalesDto()
                 {
-                    Car = new exportCarDto
+                    SingleCar = new SingleCar()
                     {
-                        Make = s.Car?.Make,
-                        Model = s.Car?.Model,
-                        TraveledDistance = s.Car?.TraveledDistance.ToString()
+                        Make = s.Car.Make,
+                        Model = s.Car.Model,
+                        TraveledDistance = s.Car.TraveledDistance
                     },
-                    Discount = s.Discount.ToString("F2", CultureInfo.InvariantCulture),
-                    CustomerName = s.Customer?.Name,
-                    Price = (s.Car?.PartsCars.Sum(pc => pc.Part.Price) ?? 0).ToString("F2", CultureInfo.InvariantCulture),
-                    PriceWithDiscount = (s.Car?.PartsCars.Sum(pc => pc.Part.Price * (1 - s.Discount / 100)) ?? 0).ToString("F2", CultureInfo.InvariantCulture)
+                    Discount = (int)s.Discount,
+                    CustomerName = s.Customer.Name,
+                    Price = s.Car.PartsCars.Sum(p => p.Part.Price),
+                    PriceWithDiscount = Math.Round((double)(s.Car.PartsCars.Sum(p => p.Part.Price) * (1 - (s.Discount / 100))), 4)
                 })
                 .ToArray();
 
-            return SerializeToXml<exportSalesDto[]>(salesWithDiscount, "sales");
+            return SerializeToXml<exportSalesDto[]>(salesDtos, "sales");
         }
+
+
 
 
 
