@@ -9,3 +9,5 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CarDealer
 build_property.ProjectDir = C:\Users\Skynet\Desktop\repos\EntityFramework\XML\CarDealer\CarDealer\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
