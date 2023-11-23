@@ -1,0 +1,16 @@
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\bin\Debug\net6.0\EventMe.Core.deps.json
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\bin\Debug\net6.0\EventMe.Core.dll
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\bin\Debug\net6.0\EventMe.Core.pdb
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\bin\Debug\net6.0\EventMe.Infrastructure.dll
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\bin\Debug\net6.0\EventMe.Infrastructure.pdb
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\obj\Debug\net6.0\EventMe.Core.csproj.AssemblyReference.cache
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\obj\Debug\net6.0\EventMe.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\obj\Debug\net6.0\EventMe.Core.AssemblyInfoInputs.cache
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\obj\Debug\net6.0\EventMe.Core.AssemblyInfo.cs
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\obj\Debug\net6.0\EventMe.Core.csproj.CoreCompileInputs.cache
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\obj\Debug\net6.0\EventMe.Core.sourcelink.json
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\obj\Debug\net6.0\EventMe.Core.csproj.CopyComplete
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\obj\Debug\net6.0\EventMe.Core.dll
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\obj\Debug\net6.0\refint\EventMe.Core.dll
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\obj\Debug\net6.0\EventMe.Core.pdb
+C:\Users\Skynet\Desktop\repos\EntityFramework\Workshop\EventMe.Core\obj\Debug\net6.0\ref\EventMe.Core.dll
