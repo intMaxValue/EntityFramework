@@ -1,0 +1,14 @@
+C:\Users\Skynet\Desktop\EventMe\EventMe.Infrastructure\bin\Debug\net6.0\EventMe.Infrastructure.deps.json
+C:\Users\Skynet\Desktop\EventMe\EventMe.Infrastructure\bin\Debug\net6.0\EventMe.Infrastructure.runtimeconfig.json
+C:\Users\Skynet\Desktop\EventMe\EventMe.Infrastructure\bin\Debug\net6.0\EventMe.Infrastructure.dll
+C:\Users\Skynet\Desktop\EventMe\EventMe.Infrastructure\bin\Debug\net6.0\EventMe.Infrastructure.pdb
+C:\Users\Skynet\Desktop\EventMe\EventMe.Infrastructure\obj\Debug\net6.0\EventMe.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Skynet\Desktop\EventMe\EventMe.Infrastructure\obj\Debug\net6.0\EventMe.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Skynet\Desktop\EventMe\EventMe.Infrastructure\obj\Debug\net6.0\EventMe.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Skynet\Desktop\EventMe\EventMe.Infrastructure\obj\Debug\net6.0\EventMe.Infrastructure.AssemblyInfo.cs
+C:\Users\Skynet\Desktop\EventMe\EventMe.Infrastructure\obj\Debug\net6.0\EventMe.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Skynet\Desktop\EventMe\EventMe.Infrastructure\obj\Debug\net6.0\EventMe.Infrastructure.dll
+C:\Users\Skynet\Desktop\EventMe\EventMe.Infrastructure\obj\Debug\net6.0\refint\EventMe.Infrastructure.dll
+C:\Users\Skynet\Desktop\EventMe\EventMe.Infrastructure\obj\Debug\net6.0\EventMe.Infrastructure.pdb
+C:\Users\Skynet\Desktop\EventMe\EventMe.Infrastructure\obj\Debug\net6.0\EventMe.Infrastructure.genruntimeconfig.cache
+C:\Users\Skynet\Desktop\EventMe\EventMe.Infrastructure\obj\Debug\net6.0\ref\EventMe.Infrastructure.dll
