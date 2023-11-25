@@ -11,7 +11,7 @@ namespace Invoices.DataProcessor.ExportDto
     public class ExportClientWithInvoicesDto
     {
         [XmlAttribute("InvoicesCount")]
-        public int InvoicesCount => Invoices?.Length ?? 0;
+        public int InvoicesCount { get; set; }
 
         [XmlElement("ClientName")]
         public string ClientName { get; set; }

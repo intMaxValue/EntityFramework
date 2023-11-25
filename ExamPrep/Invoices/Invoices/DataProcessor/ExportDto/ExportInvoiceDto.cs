@@ -11,10 +11,10 @@ namespace Invoices.DataProcessor.ExportDto
     public class ExportInvoiceDto
     {
         [XmlElement("InvoiceNumber")]
-        public string InvoiceNumber { get; set; }
+        public int InvoiceNumber { get; set; }
 
         [XmlElement("InvoiceAmount")]
-        public string InvoiceAmount { get; set; }
+        public decimal InvoiceAmount { get; set; }
 
         [XmlElement("DueDate")]
         public string DueDate { get; set; }

@@ -25,7 +25,7 @@ namespace Invoices.DataProcessor
                 .Select(p => new
                 {
                     Name = p.Name,
-                    Price = p.Price.ToString("F2"),
+                    Price = p.Price,
                     Category = p.CategoryType.ToString(),
                     Clients = p.ProductsClients
                         .Where(pc => pc.Client.Name.Length >= nameLength)
@@ -48,33 +48,29 @@ namespace Invoices.DataProcessor
         public static string ExportClientsWithTheirInvoices(InvoicesContext context, DateTime date)
         {
             var clientsWithInvoices = context.Clients
-                .Include(c => c.Invoices)
                 .Where(c => c.Invoices.Any(i => i.IssueDate > date))
-                .ToArray();
-
-            var result = clientsWithInvoices
                 .Select(c => new ExportClientWithInvoicesDto
                 {
+                    InvoicesCount = c.Invoices.Count,
                     ClientName = c.Name,
                     VatNumber = c.NumberVat,
                     Invoices = c.Invoices
-                        .Where(i => i.IssueDate > date)
+                        .OrderBy(i => i.IssueDate)
+                        .ThenByDescending(i => i.DueDate)
                         .Select(i => new ExportInvoiceDto
                         {
-                            InvoiceNumber = i.Number.ToString(),
-                            InvoiceAmount = i.Amount.ToString("F2", CultureInfo.InvariantCulture),
+                            InvoiceNumber = i.Number,
+                            InvoiceAmount = decimal.Parse(i.Amount.ToString("0.##", CultureInfo.InvariantCulture)),
                             DueDate = i.DueDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture),
                             Currency = i.CurrencyType.ToString()
                         })
-                        .OrderBy(i => i.IssueDate)
-                        .ThenByDescending(i => i.DueDate)
                         .ToArray()
                 })
-                .OrderByDescending(c => c.Invoices.Length)
+                .OrderByDescending(c => c.InvoicesCount)
                 .ThenBy(c => c.ClientName)
                 .ToArray();
 
-            return MySerializer<ExportClientWithInvoicesDto[]>(result, "Clients");
+            return MySerializer<ExportClientWithInvoicesDto[]>(clientsWithInvoices, "Clients");
         }
 
         //SERIALIZER TO XML
