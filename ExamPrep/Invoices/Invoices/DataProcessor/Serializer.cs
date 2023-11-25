@@ -25,7 +25,7 @@ namespace Invoices.DataProcessor
                 .Select(p => new
                 {
                     Name = p.Name,
-                    Price = p.Price,
+                    Price = p.Price.ToString("F2"),
                     Category = p.CategoryType.ToString(),
                     Clients = p.ProductsClients
                         .Where(pc => pc.Client.Name.Length >= nameLength)
