@@ -1,4 +1,6 @@
-﻿namespace Trucks.Data
+﻿using Trucks.Data.Models;
+
+namespace Trucks.Data
 {
     using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +15,10 @@
         { 
         }
 
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<ClientTruck> ClientsTrucks { get; set; }
+        public DbSet<Despatcher> Despatchers { get; set; }
+        public DbSet<Truck> Trucks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -25,6 +31,8 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ClientTruck>()
+                .HasKey(ct => new { ct.ClientId, ct.TruckId });
         }
     }
 }
