@@ -2,8 +2,6 @@
 {
     using Artillery.Data.Models;
     using Microsoft.EntityFrameworkCore;
-    using System.Collections.Generic;
-    using System.Reflection.Emit;
 
     public class ArtilleryContext : DbContext
     {
