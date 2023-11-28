@@ -1,4 +1,6 @@
 ﻿
+using Theatre.Data.Models;
+
 namespace Theatre.Data
 {
     using Microsoft.EntityFrameworkCore;
@@ -13,6 +15,11 @@ namespace Theatre.Data
         : base(options) 
         { 
         }
+
+        public DbSet<Cast> Casts { get; set; } = null!;
+        public DbSet<Play> Plays { get; set; } = null!;
+        public DbSet<Models.Theatre> Theatres { get; set; } = null!;
+        public DbSet<Ticket> Tickets { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
